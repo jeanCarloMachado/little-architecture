@@ -14,3 +14,5 @@ First problem solved:
 2. account for notes limit
 The code might not even be beautiful, the refactoring step of TDD is optional.
 The important part is convey the user requirements in the unit-test.
+3. Provide storage
+have a contract to follow in your contract which is described in your programming language and conveys your domain
