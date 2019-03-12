@@ -2,6 +2,21 @@ import unittest
 import json
 import os
 import pymysql
+from functools import wraps
+
+
+def log_on_call(log_str):
+    def log_decorator_decorator(func):
+        @wraps(func)
+        def internal_decorator(*args, **kwargs):
+            file = open("/tmp/foo", "a")
+            file.write("appended: %s \n" % log_str)
+            file.close()
+            return func(*args, **kwargs)
+
+        return internal_decorator
+
+    return log_decorator_decorator
 
 
 class Gateway():
@@ -42,7 +57,11 @@ class FileGateway():
 
 class ATM():
     def factoryFile(optional_di=None):
-        return ATM(FileGateway())
+        gateway = FileGateway()
+        func = gateway.load_available_notes
+        gateway.load_available_notes = log_on_call('load_available_notes was called!')(func)
+
+        return ATM(gateway)
 
     def factoryDB(optional_di=None):
         return ATM(DBGateway())
@@ -122,9 +141,9 @@ class TestFunctionalAtm(unittest.TestCase):
         self.assertEqual(result, [(1, 1)])
 
 
-class TestFunctionalMysqlAtm(unittest.TestCase):
-    def test_simple(self):
-        """ usually go to the api """
-        atm = ATM.factoryDB()
-        result = atm.withdraw(1)
-        self.assertEqual(result, [(1, 1)])
+# class TestFunctionalMysqlAtm(unittest.TestCase):
+#     def test_simple(self):
+#         """ usually go to the api """
+#         atm = ATM.factoryDB()
+#         result = atm.withdraw(1)
+#         self.assertEqual(result, [(1, 1)])
