@@ -1,11 +1,34 @@
 import unittest
 import json
 import os
+import pymysql
 
 
 class Gateway():
     def load_available_notes():
         raise Exception("implement me")
+
+
+class DBGateway():
+    def load_available_notes(self):
+        connection = pymysql.connect(
+            host='127.0.0.1',
+            user='gandalf',
+            password='gandalf',
+            db='test',
+            port=3306,
+            charset='utf8',
+            cursorclass=pymysql.cursors.DictCursor)
+
+        try:
+
+            with connection.cursor() as cursor:
+                sql = "SELECT `note`, `quantity` FROM `note_availability`"
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return list(map(lambda data: (data['note'], data['quantity']), result))
+        finally:
+            connection.close()
 
 
 class FileGateway():
@@ -18,8 +41,11 @@ class FileGateway():
 
 
 class ATM():
-    def factory(optional_di=None):
+    def factoryFile(optional_di=None):
         return ATM(FileGateway())
+
+    def factoryDB(optional_di=None):
+        return ATM(DBGateway())
 
     def __init__(self, gateway):
         self._gateway = gateway
@@ -91,6 +117,14 @@ class TestIngrationAtm(unittest.TestCase):
 class TestFunctionalAtm(unittest.TestCase):
     def test_simple(self):
         """ usually go to the api """
-        atm = ATM.factory()
+        atm = ATM.factoryFile()
+        result = atm.withdraw(1)
+        self.assertEqual(result, [(1, 1)])
+
+
+class TestFunctionalMysqlAtm(unittest.TestCase):
+    def test_simple(self):
+        """ usually go to the api """
+        atm = ATM.factoryDB()
         result = atm.withdraw(1)
         self.assertEqual(result, [(1, 1)])
