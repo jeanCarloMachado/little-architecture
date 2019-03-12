@@ -2,25 +2,22 @@ import unittest
 from typing import Dict, List
 
 Note = int
-Quantity = int
 RequestedAmount = int
 
 
 def withdraw(available_notes, amount: RequestedAmount):
     """ available_notes must be sorted from the highest value to the lowest """
-   if available_notes is None:
+    if available_notes is None:
         return []
-    if amount in available_notes:
-        return [(amount, 1)]
-
     rest_amount = amount
     user_notes = []
-    for current_note, quantity in available_notes:
+    for current_note, quantity_available in available_notes:
         if current_note <= rest_amount:
             quantity_of_notes = _get_maximum_of_notes_to_complete_value(rest_amount, current_note)
+            if quantity_of_notes > quantity_available:
+                quantity_of_notes = quantity_available
             user_notes.append((current_note, quantity_of_notes))
             rest_amount = rest_amount - (current_note * quantity_of_notes)
-            print(rest_amount)
 
     return user_notes
 
@@ -59,3 +56,13 @@ class TestInitial(unittest.TestCase):
         available_notes = [(10, 2), (5, 2)]
         result = withdraw(available_notes, 15)
         self.assertEquals(result, [(10, 1), (5, 1)])
+
+    def test_does_not_uses_notes_that_are_not_available(self):
+        available_notes = [(10, 1), (5, 2)]
+        result = withdraw(available_notes, 20)
+        self.assertEquals(result, [(10, 1), (5, 2)])
+
+    def test_complex_case(self):
+        available_notes = [(10, 1), (5, 3), (1, 1)]
+        result = withdraw(available_notes, 16)
+        self.assertEquals(result, [(10, 1), (5, 1), (1, 1)])
