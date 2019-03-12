@@ -6,6 +6,11 @@ This talk is heavily inspired by Uncle's bob post titled [A Little Architecture]
 
 ----
 
+## Duration: 20 mins to 1 hour
+
+- How to setup an application from the scratch
+- How to use TDD, OOP, FP, and AOP.
+- The gateway pattern and why it matters
 
 ## Problem space
 
@@ -30,16 +35,16 @@ when a user wants to withdraw money.
 
 First problem solved:
 
-1. TDD to Get the right notes given the existence of them (as argument)
+1. 1 note 1 result
 
 	- Simplify the problem, first start assuming a endless amount of notes.
 
-2. Account for notes limit
+2. retrieve notes composing price with different ones & support quantity available
 
 	- The code might not even be beautiful, the refactoring step of TDD is optional.
 	- The important part is convey the user requirements in the unit-test.
 
-3. Add integration test
+3. integration test, create interface
 	- Have a contract to follow in your contract which is described in your programming language and conveys your domain
 	- The users perspective
 
@@ -47,7 +52,7 @@ First problem solved:
 	- Have end-to-end testing
 
 
-### Lessons
+### Summary
 
 - Architecture is about intent
 - We don't want to go too deep in the unit testing code. If we stay at the business requirement level we can refactor the code. Don't test code.
@@ -55,7 +60,7 @@ First problem solved:
 - We don't want low level policy infest higher level policy
 
 
-### Setup mysql container
+### Setup Mysql container
 
 ```sh
 docker run --rm -e 'MYSQL_ROOT_HOST=%' -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER='gandalf' -e MYSQL_PASSWORD='gandalf' -e MYSQL_DATABASE=test -p 3306:3306 mysql:5.7 &
