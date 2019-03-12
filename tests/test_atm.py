@@ -4,13 +4,16 @@ import unittest
 def withdraw(availble_notes, amount: int):
     """ available notes is a datastructture of List[(note, quantityAvailable)] - sorted by bigger note to smaller """
 
-    rest = amount
     result = []
-    for note, quantity in availble_notes:
+    rest = amount
+    for note, quantity_available in availble_notes:
         if rest >= note:
-            number_of_notes = _get_number_of_notes_minor_than_amount(amount, note)
+            number_of_notes = _get_number_of_notes_minor_than_amount(rest, note)
+            if number_of_notes > quantity_available:
+                number_of_notes = quantity_available
+
+            rest -= (note * number_of_notes)
             result.append((note, number_of_notes))
-            rest -= note * number_of_notes
 
     return result
 
@@ -39,6 +42,10 @@ class TestAtm(unittest.TestCase):
         result = withdraw(availble_notes=[(10, 2)], amount=20)
         self.assertEqual(result, [(10, 2)])
 
-    # def test_aggregate_price_with_different_notes(self):
-    #     result = withdraw(availble_notes=[(10, 1), (5, 1)], amount=15)
-    #     self.assertEqual(result, [(10, 1), (5, 1)])
+    def test_aggregate_price_with_different_notes(self):
+        result = withdraw(availble_notes=[(10, 1), (5, 1)], amount=15)
+        self.assertEqual(result, [(10, 1), (5, 1)])
+
+    def test_use_different_notes_to_complete_when_bigger_unavailable(self):
+        result = withdraw(availble_notes=[(10, 1), (5, 2)], amount=20)
+        self.assertEqual(result, [(10, 1), (5, 2)])
