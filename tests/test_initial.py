@@ -49,28 +49,32 @@ class TestInitial(unittest.TestCase):
         self.assertEquals(result, [])
 
     def test_return_highest_note_that_matches_value(self):
-        available_notes = [(10, 1), (5, 2)]
+        available_notes = [NoteAvailability(note=10, quantity=1), NoteAvailability(note=5, quantity=2)]
         result = withdraw(available_notes, 10)
         self.assertEquals(result, [(10, 1)])
         result = withdraw(available_notes, 5)
         self.assertEquals(result, [(5, 1)])
 
     def test_join_two_of_the_same(self):
-        available_notes = [(10, 2), (5, 2)]
+        available_notes = [NoteAvailability(note=10, quantity=2), NoteAvailability(note=5, quantity=2)]
         result = withdraw(available_notes, 20)
         self.assertEquals(result, [(10, 2)])
 
     def test_use_different_notes_to_complete_value(self):
-        available_notes = [(10, 2), (5, 2)]
+        available_notes = [NoteAvailability(note=10, quantity=2), NoteAvailability(note=5, quantity=2)]
         result = withdraw(available_notes, 15)
         self.assertEquals(result, [(10, 1), (5, 1)])
 
     def test_does_not_uses_notes_that_are_not_available(self):
-        available_notes = [(10, 1), (5, 2)]
+        available_notes = [NoteAvailability(note=10, quantity=1), NoteAvailability(note=5, quantity=2)]
         result = withdraw(available_notes, 20)
         self.assertEquals(result, [(10, 1), (5, 2)])
 
     def test_complex_case(self):
-        available_notes = [(10, 1), (5, 3), (1, 1)]
+        available_notes = [
+            NoteAvailability(note=10, quantity=1),
+            NoteAvailability(note=5, quantity=3),
+            NoteAvailability(note=1, quantity=1)
+        ]
         result = withdraw(available_notes, 16)
         self.assertEquals(result, [(10, 1), (5, 1), (1, 1)])
