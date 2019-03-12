@@ -141,9 +141,9 @@ class TestFunctionalAtm(unittest.TestCase):
         self.assertEqual(result, [(1, 1)])
 
 
-# class TestFunctionalMysqlAtm(unittest.TestCase):
-#     def test_simple(self):
-#         """ usually go to the api """
-#         atm = ATM.factoryDB()
-#         result = atm.withdraw(1)
-#         self.assertEqual(result, [(1, 1)])
+class TestFunctionalMysqlAtm(unittest.TestCase):
+    def test_simple(self):
+        """ usually go to the api """
+        atm = ATM.factoryDB()
+        result = atm.withdraw(1)
+        self.assertEqual(result, [(1, 1)])
