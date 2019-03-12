@@ -7,7 +7,8 @@ RequestedAmount = int
 
 
 def withdraw(available_notes, amount: RequestedAmount):
-    if available_notes is None:
+    """ available_notes must be sorted from the highest value to the lowest """
+   if available_notes is None:
         return []
     if amount in available_notes:
         return [(amount, 1)]
@@ -15,15 +16,21 @@ def withdraw(available_notes, amount: RequestedAmount):
     rest_amount = amount
     user_notes = []
     for current_note, quantity in available_notes:
-        if rest_amount % current_note == 0:
-            quantity_of_notes = int(rest_amount / current_note)
+        if current_note <= rest_amount:
+            quantity_of_notes = _get_maximum_of_notes_to_complete_value(rest_amount, current_note)
             user_notes.append((current_note, quantity_of_notes))
-            return user_notes
-
-        if current_note < rest_amount:
-            user_notes[current_note] = 1
+            rest_amount = rest_amount - (current_note * quantity_of_notes)
+            print(rest_amount)
 
     return user_notes
+
+
+def _get_maximum_of_notes_to_complete_value(value_to_cover, note_value):
+    number_of_notes = 1
+    while value_to_cover >= (note_value * (number_of_notes + 1)):
+        number_of_notes += 1
+
+    return number_of_notes
 
 
 class TestInitial(unittest.TestCase):
@@ -47,3 +54,8 @@ class TestInitial(unittest.TestCase):
         available_notes = [(10, 2), (5, 2)]
         result = withdraw(available_notes, 20)
         self.assertEquals(result, [(10, 2)])
+
+    def test_use_different_notes_to_complete_value(self):
+        available_notes = [(10, 2), (5, 2)]
+        result = withdraw(available_notes, 15)
+        self.assertEquals(result, [(10, 1), (5, 1)])
