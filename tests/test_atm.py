@@ -1,4 +1,6 @@
 import unittest
+import json
+import os
 
 
 class Gateway():
@@ -6,7 +8,19 @@ class Gateway():
         raise Exception("implement me")
 
 
+class FileGateway():
+    def load_available_notes(self):
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        handle = open(f'{current_path}/../data/atm_state.json')
+        result = json.loads(handle.read())
+        handle.close()
+        return list(map(lambda data: (data['note'], data['quantity']), result['available_notes']))
+
+
 class ATM():
+    def factory(optional_di=None):
+        return ATM(FileGateway())
+
     def __init__(self, gateway):
         self._gateway = gateway
 
@@ -70,5 +84,13 @@ class TestIngrationAtm(unittest.TestCase):
         gateway.load_available_notes = lambda: [(1, 1)]
         atm = ATM(gateway)
 
+        result = atm.withdraw(1)
+        self.assertEqual(result, [(1, 1)])
+
+
+class TestFunctionalAtm(unittest.TestCase):
+    def test_simple(self):
+        """ usually go to the api """
+        atm = ATM.factory()
         result = atm.withdraw(1)
         self.assertEqual(result, [(1, 1)])
