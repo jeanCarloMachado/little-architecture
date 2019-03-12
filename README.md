@@ -16,3 +16,8 @@ The code might not even be beautiful, the refactoring step of TDD is optional.
 The important part is convey the user requirements in the unit-test.
 3. Provide storage
 have a contract to follow in your contract which is described in your programming language and conveys your domain
+
+the best architect makes decisions about architecture able to be delayed
+we don't want low level policy infest user logic, right?
+have end-to-end testing
+the users perspective
