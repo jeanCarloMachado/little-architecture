@@ -4,6 +4,10 @@ This is a hands on talk about the little architecture.
 This talk is heavily inspired by Uncle's bob post titled [A Little Architecture](https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html).
 
 
+How this repo is organized?
+
+branches version1 to versionN contain the actual implementation of the problem.
+
 ----
 
 ## Duration: 20 mins to 1 hour
@@ -54,7 +58,6 @@ First problem solved:
 
 ### Summary
 
-- Architecture is about intent
 - We don't want to go too deep in the unit testing code. If we stay at the business requirement level we can refactor the code. Don't test code.
 - The best architect makes decisions about architecture able to be delayed
 - We don't want low level policy infest higher level policy
