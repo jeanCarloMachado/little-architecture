@@ -72,4 +72,7 @@ First problem solved:
 - We don't want to go too deep in the unit testing code. If we stay at the business requirement level we can refactor the code. Don't test code.
 - The best architect makes decisions about architecture able to be delayed
 - We don't want low level policy infest higher level policy
+- There's no 1 paradigm, they complement one another
+
+See coverage.
 
