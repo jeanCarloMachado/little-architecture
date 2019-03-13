@@ -6,7 +6,15 @@ This is a hands on talk about the little architecture.
 
 ## How this repo is organized?
 
-Branches [version1](https://github.com/jeanCarloMachado/little-architecture/tree/version1), [version2](https://github.com/jeanCarloMachado/little-architecture/tree/version2) to versionN contain the actual implementation of the problem.
+The actual code is done in branches:
+
+- [version1](https://github.com/jeanCarloMachado/little-architecture/tree/version1)
+- [version2](https://github.com/jeanCarloMachado/little-architecture/tree/version2) 
+- [version3](https://github.com/jeanCarloMachado/little-architecture/tree/version3) 
+
+To versionN.
+
+
 
 ## Topics covered
 
@@ -17,7 +25,7 @@ How to build a system with great quality and delivery timming.
 - The gateway pattern and why it matters
 - Bring fun back to programming!
 
-**Duration: 20 min**
+**Duration: 25 min**
 
 ## Problem space
 
