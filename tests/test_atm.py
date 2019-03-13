@@ -1,9 +1,9 @@
+from functools import wraps
 import unittest
 import json
 import os
 import pymysql
-from functools import wraps
-from typing import Dict, List, Generic, NamedTuple
+from typing import Dict, List, NamedTuple
 
 Note = int
 Quantity = int
@@ -32,7 +32,7 @@ class Gateway:
         raise NotImplementedError('implement me!')
 
 
-class DBGateway():
+class DBGateway(Gateway):
     def load_available_notes(self) -> List[NoteAndQuantity]:
         connection = pymysql.connect(
             host='127.0.0.1',
@@ -54,7 +54,7 @@ class DBGateway():
             connection.close()
 
 
-class FileGateway():
+class FileGateway(Gateway):
     def load_available_notes(self) -> List[NoteAndQuantity]:
         current_path = os.path.dirname(os.path.realpath(__file__))
         handle = open(f'{current_path}/../data/atm_state.json')
@@ -128,15 +128,6 @@ class TestAtm(unittest.TestCase):
     def test_do_not_return_non_available_notes_use_smaller_ones(self):
         result = Atm._withdraw([NoteAndQuantity(10, 1), NoteAndQuantity(5, 2)], 20)
         self.assertEquals(result, [NoteAndQuantity(10, 1), NoteAndQuantity(5, 2)])
-
-
-class IntegrationAtm(unittest.TestCase):
-    def test_simplest(self):
-        gateway = Gateway()
-        gateway.load_available_notes = lambda: [NoteAndQuantity(1, 1)]
-        atm = Atm(gateway)
-        result = atm.withdraw(1)
-        self.assertEquals(result, [NoteAndQuantity(1, 1)])
 
 
 class IntegrationAtm(unittest.TestCase):
