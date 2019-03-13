@@ -10,10 +10,12 @@ branches [version1](https://github.com/jeanCarloMachado/little-architecture/tree
 
 ## Duration: 20 mins - Topics covered
 
+How to build a system with great quality and delivery timming.
+
 - How to setup an application from the scratch
-- How to use TDD, OOP, FP, AOP and SP
+- How to use TDD, Composed types, OOP, FP, AOP and SP
 - The gateway pattern and why it matters
-- Evolutionary 
+- Bring fun back to programming!
 
 
 ## Problem space
@@ -52,7 +54,8 @@ First problem solved:
 
 4. Add functional test & Provide 2 types of storage
 	- Have end-to-end testing
-
+	
+See coverage.
 
 ### Summary
 
@@ -62,17 +65,9 @@ First problem solved:
 
 	Robert Martin
 	
-	
-	It is better to have 100 functions operate on one
-	data structure than 10 functions on 10 data structures.
 
-	Alan Perlis
-
-
-- We don't want to go too deep in the unit testing code. If we stay at the business requirement level we can refactor the code. Don't test code.
-- The best architect makes decisions about architecture able to be delayed
+- The best architect makes decisions about architecture able to be delayed, the only constant is change
 - We don't want low level policy infest higher level policy
 - There's no 1 paradigm, they complement one another
-
-See coverage.
+ - Different modules from the system accept different levels of engineering
 
