@@ -10,11 +10,12 @@ branches version1 to versionN contain the actual implementation of the problem.
 
 ----
 
-## Duration: 20 mins to 1 hour
+## Duration: 20 mins
 
 - How to setup an application from the scratch
-- How to use TDD, OOP, FP, and AOP.
+- How to use TDD, OOP, FP, and AOP, SP.
 - The gateway pattern and why it matters
+
 
 ## Problem space
 
