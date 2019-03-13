@@ -69,5 +69,5 @@ See coverage.
 - The best architect makes decisions about architecture able to be delayed, the only constant is change
 - We don't want low level policy infest higher level policy
 - There's no 1 paradigm, they complement one another
- - Different modules from the system accept different levels of engineering
+- Different modules from the system accept different levels of engineering. TDD is not for every domain, [see](https://en.wikipedia.org/wiki/Cynefin_framework)
 
