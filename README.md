@@ -8,7 +8,7 @@ This is a hands on talk about the little architecture.
 
 Branches [version1](https://github.com/jeanCarloMachado/little-architecture/tree/version1), [version2](https://github.com/jeanCarloMachado/little-architecture/tree/version2) to versionN contain the actual implementation of the problem.
 
-## Topics covered - (Duration 20 minutes)
+## Topics covered
 
 How to build a system with great quality and delivery timming.
 
@@ -17,6 +17,7 @@ How to build a system with great quality and delivery timming.
 - The gateway pattern and why it matters
 - Bring fun back to programming!
 
+**Duration: 20 min**
 
 ## Problem space
 
