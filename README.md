@@ -13,7 +13,7 @@ Branches [version1](https://github.com/jeanCarloMachado/little-architecture/tree
 How to build a system with great quality and delivery timming.
 
 - How to setup an application from the scratch
-- How to use TDD, Composed types, OOP, FP, AOP and SP
+- How to use  OOP, FP, AOP, SP, TDD and types!
 - The gateway pattern and why it matters
 - Bring fun back to programming!
 
