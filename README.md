@@ -1,13 +1,13 @@
 # Little Architecture hands-on
 
 This is a hands on talk about the little architecture.
-This talk is heavily inspired by Uncle's bob post titled [A Little Architecture](https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html).
 
 
-How this repo is organized?
+
+## How this repo is organized?
 	Branches [version1](https://github.com/jeanCarloMachado/little-architecture/tree/version1), [version2](https://github.com/jeanCarloMachado/little-architecture/tree/version2) to versionN contain the actual implementation of the problem.
 
-## Duration: 20 mins - Topics covered
+## Topics covered - (Duration 20 minutes)
 
 How to build a system with great quality and delivery timming.
 
@@ -69,6 +69,8 @@ See coverage.
 - We don't want low level policy infest higher level policy
 - There's no 1 paradigm, they complement one another
 - Different modules from the system accept different levels of engineering. TDD is not for every domain, [see](https://en.wikipedia.org/wiki/Cynefin_framework)
-
+- The gateway pattern allows you to change low level details without changing higher level policies. And to test!
 
 A real-world software following this practices? See the search [service](https://github.com/getyourguide/search).
+
+This talk is inspired by Uncle's bob post titled [A Little Architecture](https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html).
