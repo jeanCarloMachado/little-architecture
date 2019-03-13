@@ -25,7 +25,7 @@ How to build a system with great quality and delivery timming.
 - The gateway pattern and why it matters
 - Bring fun back to programming!
 
-**Duration: 25 min**
+**Duration: 25 min, help me when I do mistakes and we can make it!**
 
 ## Problem space
 
