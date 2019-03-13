@@ -8,13 +8,12 @@ How this repo is organized?
 
 branches version1 to versionN contain the actual implementation of the problem.
 
-----
-
-## Duration: 20 mins
+## Duration: 20 mins - Topics covered
 
 - How to setup an application from the scratch
-- How to use TDD, OOP, FP, and AOP, SP.
+- How to use TDD, OOP, FP, AOP and SP
 - The gateway pattern and why it matters
+- Evolutionary 
 
 
 ## Problem space
@@ -33,8 +32,6 @@ when a user wants to withdraw money.
 
     If the user requests to withdraw 55 and the bank has no 50 note but has 5 notes of ten
     and a lot of notes of 5 then the machine should return 5 notes of 10 and 1 note of 5.
-
-    ----
 
 ## Solution space
 
@@ -59,10 +56,25 @@ First problem solved:
 
 ### Summary
 
+	Relatively simple things can tolerate a certain level of
+	disorganization. However, as complexity increases, disorganization
+	becomes suicidal.
+
+	Robert Martin
+	
+	It is better to have 100 functions operate on one
+	data structure than 10 functions on 10 data structures.
+
+	Alan Perlis
+
+
 - We don't want to go too deep in the unit testing code. If we stay at the business requirement level we can refactor the code. Don't test code.
 - The best architect makes decisions about architecture able to be delayed
 - We don't want low level policy infest higher level policy
 
+
+
+---
 
 ### Setup Mysql container
 
