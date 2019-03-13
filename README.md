@@ -5,7 +5,8 @@ This is a hands on talk about the little architecture.
 
 
 ## How this repo is organized?
-	Branches [version1](https://github.com/jeanCarloMachado/little-architecture/tree/version1), [version2](https://github.com/jeanCarloMachado/little-architecture/tree/version2) to versionN contain the actual implementation of the problem.
+
+Branches [version1](https://github.com/jeanCarloMachado/little-architecture/tree/version1), [version2](https://github.com/jeanCarloMachado/little-architecture/tree/version2) to versionN contain the actual implementation of the problem.
 
 ## Topics covered - (Duration 20 minutes)
 
