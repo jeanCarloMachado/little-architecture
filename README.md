@@ -62,6 +62,7 @@ First problem solved:
 
 	Robert Martin
 	
+	
 	It is better to have 100 functions operate on one
 	data structure than 10 functions on 10 data structures.
 
@@ -72,20 +73,3 @@ First problem solved:
 - The best architect makes decisions about architecture able to be delayed
 - We don't want low level policy infest higher level policy
 
-
-
----
-
-### Setup Mysql container
-
-```sh
-docker run --rm -e 'MYSQL_ROOT_HOST=%' -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER='gandalf' -e MYSQL_PASSWORD='gandalf' -e MYSQL_DATABASE=test -p 3306:3306 mysql:5.7 &
-mysql -u root -p123456  test
-```
-```sql
-
-CREATE table note_availability (note int, quantity int);
-insert into note_availability (note, quantity) values (1,1);
-
-
-```
