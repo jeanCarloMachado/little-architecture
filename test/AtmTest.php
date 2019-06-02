@@ -49,33 +49,24 @@ class AtmTest extends \PHPUnit\Framework\TestCase
 
 function withdraw($requestedAmount) : array
 {
-
     if (!$requestedAmount) {
         throw new InvalidArgumentException;
     }
 
     $availableNotes = [500, 100, 50, 10, 5];
-    rsort($availableNotes);
-
-
     $returnedNotes = [];
     $valueReaminingToFullfill = $requestedAmount;
 
     foreach ($availableNotes as $note) {
-        if ($note > $valueReaminingToFullfill) {
-            continue;
-        }
-
-        $quantityOfNotes = intval($valueReaminingToFullfill / $note);
-        $valueReaminingToFullfill-= $note * $quantityOfNotes;
-        $returnedNotes = array_merge($returnedNotes, addNNotes($note, $quantityOfNotes));
+        $quantityOfThisNote = intval($valueReaminingToFullfill / $note);
+        $valueReaminingToFullfill-= $note * $quantityOfThisNote;
+        $returnedNotes = appendNNotes($returnedNotes, $note, $quantityOfThisNote);
     }
 
     return $returnedNotes;
 }
 
-function addNNotes($note, $n) {
-    $result = [];
+function appendNNotes($result, $note, $n) : array {
     for ($i = 0 ; $i < $n; $i++) {
          $result[] = $note;
     }
