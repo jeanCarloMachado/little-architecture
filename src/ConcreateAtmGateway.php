@@ -9,4 +9,7 @@ class ConcreateAtmGateway extends AtmGatewayInterface {
 
         return $result;
     }
+
+    public function removeNotesFromStorage() {
+    }
 }

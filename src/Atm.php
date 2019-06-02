@@ -25,6 +25,7 @@ class Atm {
         $atm = new Atm($gateway);
         return $atm;
     }
+
     public function __construct(AtmGatewayInterface $gateway) {
         $this->gateway = $gateway;
     }
@@ -32,7 +33,10 @@ class Atm {
     public function withdraw(int $requestedAmount) : array
     {
         $availability = $this->gateway->getAvailablity();
-        return Atm::_withdraw($availability, $requestedAmount);
+        $result = Atm::_withdraw($availability, $requestedAmount);
+        $this->gateway->removeNotesFromStorage($result);
+
+        return $result;
     }
 
     static function _withdraw($availability, $requestedAmount) {

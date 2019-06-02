@@ -12,6 +12,7 @@ class AtmIntegrationTest extends \PHPUnit\Framework\TestCase {
     {
         $gateway = $this->prophesize(AtmGatewayInterface::class);
         $gateway->getAvailablity()->willReturn([5=>2, 10 => 0]);
+        $gateway->removeNotesFromStorage([5, 5])->shouldBeCalled();
 
         $atm = new Atm($gateway->reveal());
 
