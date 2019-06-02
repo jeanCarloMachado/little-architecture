@@ -6,6 +6,11 @@ use InvalidArgumentException;
 
 class Atm {
 
+    public static function factory($container = null) {
+        $gateway = new AtmFileGateway();
+        $atm = new Atm($gateway);
+        return $atm;
+    }
     public function __construct(AtmGateway $gateway) {
         $this->gateway = $gateway;
     }
