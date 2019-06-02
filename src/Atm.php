@@ -8,7 +8,7 @@ class Atm {
 
     public static function factory($container = null) {
         $logger = function($str) {
-            file_put_contents('/tmp/log', $str, FILE_APPEND);
+            file_put_contents('/tmp/log', $str."\n", FILE_APPEND);
         };
 
         $gateway = new class($logger) extends ConcreateAtmGateway {

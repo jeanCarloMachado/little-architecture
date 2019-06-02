@@ -12,7 +12,7 @@ class AtmFunctionalTest extends \PHPUnit\Framework\TestCase {
     {
         $atm = Atm::factory();
         $result = $atm->withdraw(10);
-        $this->assertEquals([5, 5], $result);
+        $this->assertEquals([10], $result);
     }
 }
 
