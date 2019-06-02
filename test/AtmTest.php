@@ -1,7 +1,5 @@
 <?php
 
-use InvalidArgumentException;
-
 use Atm\Atm;
 
 /**

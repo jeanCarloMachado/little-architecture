@@ -3,6 +3,11 @@ namespace Atm;
 use InvalidArgumentException;
 
 class Atm {
+    static function factory($container = null) {
+        $gateway = new AtmGatewayConcrete();
+
+        return new Atm($gateway);
+    }
     public function __construct(AtmGateway $gateway) {
         $this->gateway = $gateway;
     }
