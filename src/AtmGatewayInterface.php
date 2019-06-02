@@ -2,7 +2,7 @@
 
 namespace Atm;
 
-abstract class AtmGateway {
+abstract class AtmGatewayInterface {
     public function getAvailablity() {
         throw new \Exception("You must implement me");
     }

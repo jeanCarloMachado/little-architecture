@@ -7,11 +7,25 @@ use InvalidArgumentException;
 class Atm {
 
     public static function factory($container = null) {
-        $gateway = new AtmFileGateway();
+        $logger = function($str) {
+            file_put_contents('/tmp/log', $str, FILE_APPEND);
+        };
+
+        $gateway = new class($logger) extends ConcreateAtmGateway {
+            public function __construct($logger) {
+                $this->logger = $logger;
+            }
+            function getAvailablity()
+            {
+                $logger = $this->logger;
+                $logger('call get availability');
+                return parent::getAvailablity();
+            }
+        };
         $atm = new Atm($gateway);
         return $atm;
     }
-    public function __construct(AtmGateway $gateway) {
+    public function __construct(AtmGatewayInterface $gateway) {
         $this->gateway = $gateway;
     }
 

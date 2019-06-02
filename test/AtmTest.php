@@ -19,7 +19,7 @@ class AtmTest extends \PHPUnit\Framework\TestCase
 
     public function testReturnsExactNoteAsked()
     {
-        $availability = [50 => 1, 10=> 1, 5=>2];
+        $availability = [50 => 1, 10 => 1, 5 => 2];
         $result = Atm::_withdraw($availability, 5);
         $this->assertEquals($result, [5]);
 
@@ -52,12 +52,7 @@ class AtmTest extends \PHPUnit\Framework\TestCase
 
     public function testAvailabilityDoesNotReturnBiggerNoteWhenNoAvailability()
     {
-        $gateway = $this->prophesize(AtmGateway::class);
-        $gateway->getAvailablity()->willReturn([5=>2, 10 => 0]);
-
-        $atm = new Atm($gateway->reveal());
-
-        $result = $atm->withdraw(10);
+        $result = Atm::_withdraw([5=>2, 10 => 0], 10);
         $this->assertEquals([5, 5], $result);
     }
 }

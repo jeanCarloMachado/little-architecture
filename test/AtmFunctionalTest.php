@@ -1,6 +1,5 @@
 <?php
 
-use InvalidArgumentException;
 use Atm\Atm;
 use Atm\AtmGateway;
 

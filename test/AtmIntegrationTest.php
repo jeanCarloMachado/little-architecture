@@ -1,8 +1,7 @@
 <?php
 
-use InvalidArgumentException;
 use Atm\Atm;
-use Atm\AtmGateway;
+use Atm\AtmGatewayInterface;
 
 /**
  * @author Jean Carlo Machado <contato@jeancarlomachado.com.br>
@@ -11,7 +10,7 @@ class AtmIntegrationTest extends \PHPUnit\Framework\TestCase {
 
     public function testIntegration()
     {
-        $gateway = $this->prophesize(AtmGateway::class);
+        $gateway = $this->prophesize(AtmGatewayInterface::class);
         $gateway->getAvailablity()->willReturn([5=>2, 10 => 0]);
 
         $atm = new Atm($gateway->reveal());
