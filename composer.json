@@ -2,8 +2,7 @@
     "name": "jean-carlo-machado/little-architecture",
     "minimum-stability": "dev",
     "require-dev": {
-        "phpunit/phpunit": "~8",
-        "felixfbecker/language-server": "dev-master"
+        "phpunit/phpunit": "~8"
     },
     "autoload": {
         "psr-4": {
