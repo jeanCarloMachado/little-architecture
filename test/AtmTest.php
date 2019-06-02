@@ -67,11 +67,17 @@ function withdraw($requestedAmount) : array
         }
 
         $quantityOfNotes = intval($valueReaminingToFullfill / $note);
-        for ($i = 0 ; $i < $quantityOfNotes; $i++) {
-            $returnedNotes[] = $note;
-        }
         $valueReaminingToFullfill-= $note * $quantityOfNotes;
+        $returnedNotes = array_merge($returnedNotes, addNNotes($note, $quantityOfNotes));
     }
 
     return $returnedNotes;
+}
+
+function addNNotes($note, $n) {
+    $result = [];
+    for ($i = 0 ; $i < $n; $i++) {
+         $result[] = $note;
+    }
+    return $result;
 }
