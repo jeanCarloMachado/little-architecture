@@ -11,7 +11,7 @@ class AtmFunctionalTest extends \PHPUnit\Framework\TestCase
     public function testFunctional()
     {
         $service = Atm::factory();
-        $result = $service->withdraw(10);
-        $this->assertEquals([5, 5], $result);
+        $result = $service->withdraw(30);
+        $this->assertEquals([10, 10, 5, 5], $result);
     }
 }
