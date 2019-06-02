@@ -8,61 +8,77 @@ use InvalidArgumentException;
  */
 class AtmTest extends \PHPUnit\Framework\TestCase
 {
+    private static $allAvailable = [
+        500 => 2,
+        50 => 2,
+        10 => 2,
+        5 => 2,
+    ];
     public function testFailsWhenWrithdrawNothing()
     {
         $this->expectException(InvalidArgumentException::class);
-        withdraw(null);
+        Atm::statelessWithdraw([], null);
     }
 
     public function testReturnAskedNote()
     {
-        $this->assertEquals([5], withdraw(5));
-        $this->assertEquals([10], withdraw(10));
+        $this->assertEquals([5], Atm::statelessWithdraw(self::$allAvailable, 5));
+        $this->assertEquals([10], Atm::statelessWithdraw(self::$allAvailable, 10));
     }
 
     public function testReturnMoreOfSameWhenMultiple()
     {
-        $this->assertEquals([500, 500], withdraw(1000));
+        $this->assertEquals([500, 500], Atm::statelessWithdraw(self::$allAvailable, 1000));
     }
 
     public function testReturnMultipleTypesOfNotes()
     {
-        $this->assertEquals([10, 5], withdraw(15));
+        $this->assertEquals([10, 5], Atm::statelessWithdraw(self::$allAvailable, 15));
+    }
+
+    public function testReturnSmallterTypeDueToNonAvailability()
+    {
+        $this->assertEquals([5, 5], Atm::statelessWithdraw([10=>0, 5=>2], 10));
     }
 }
 
-function withdraw($amountRequested) {
+class Atm {
+    function statelessWithdraw($notesavailability, $amountrequested) {
 
-    if (!$amountRequested) {
-        throw new InvalidArgumentException;
-    }
-
-    $notes  = [500, 100, 50, 10, 5];
-
-    $result = [];
-    $amountRest = $amountRequested;
-    foreach ($notes as $note) {
-        if (!noteCanReduceFromAmount($note, $amountRest))  {
-            continue;
+        if (!$amountrequested) {
+            throw new InvalidArgumentException;
         }
 
-        $quantityOfNotes = intval($amountRest / $note);
-        $result = addNotesQuantity($result, $note, $quantityOfNotes);
+        $result = [];
+        $amountrest = $amountrequested;
+        foreach ($notesavailability as $note => $availablequantity) {
+            if (!self::notecanreducefromamount($note, $amountrest))  {
+                continue;
+            }
 
-        $amountRest-= $note * $quantityOfNotes;
+            $quantityofnotes = intval($amountrest / $note);
 
-    }
+            if ($quantityofnotes > $availablequantity) {
+                $quantityofnotes = $availablequantity;
+            }
 
-    return $result;
-}
+            $result = self::addnotesquantity($result, $note, $quantityofnotes);
 
-function addNotesQuantity($result, $note, $quantityOfNotes) {
-        for ($i = 0 ; $i < $quantityOfNotes ; $i++) {
-            $result[] = $note;
+            $amountrest-= $note * $quantityofnotes;
+
         }
+
         return $result;
-}
+    }
 
-function noteCanReduceFromAmount($note, $amountRest) {
-    return ($amountRest / $note) >= 1;
+    function addnotesquantity($result, $note, $quantityofnotes) {
+            for ($i = 0 ; $i < $quantityofnotes ; $i++) {
+                $result[] = $note;
+            }
+            return $result;
+    }
+
+    function notecanreducefromamount($note, $amountrest) {
+        return ($amountrest / $note) >= 1;
+    }
 }
