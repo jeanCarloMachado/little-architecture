@@ -1,8 +1,5 @@
 {
     "name": "jean-carlo-machado/little-architecture",
-    "require-dev": {
-        "phpunit/phpunit": "~8"
-    },
     "autoload": {
         "psr-4": {
             "Atm\\": "src"
