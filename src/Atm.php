@@ -8,7 +8,24 @@ use InvalidArgumentException;
 class Atm
 {
     static function factory($container = null) {
-        $gateway = new ConcreteAtmGateway;
+
+       $logger = function($str) {
+                file_put_contents('/tmp/log', $str."\n", FILE_APPEND);
+        };
+
+        $runQuery = function($sql) {
+
+            $db = new \PDO('mysql:host=127.0.0.1;dbname=test', 'gandalf', 'gandalf');
+            return $db->query($sql)->fetchAll();
+        };
+
+        $loggedRunQuery = function($sql) use($logger, $runQuery) {
+            $logger('calling sql: '.$sql);
+            return $runQuery($sql);
+
+        };
+
+        $gateway = new ConcreteAtmGateway($loggedRunQuery);
         return new Atm($gateway);
     }
     public function __construct(AtmGateway $gateway) {

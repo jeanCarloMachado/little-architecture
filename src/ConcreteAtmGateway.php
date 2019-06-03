@@ -6,10 +6,12 @@ namespace Atm;
 
 class ConcreteAtmGateway implements AtmGateway
 {
+    function __construct($runQuery) {
+        $this->runQuery = $runQuery;
+    }
     function getAvailability()
     {
-        $db = new \PDO('mysql:host=127.0.0.1;dbname=test', 'gandalf', 'gandalf');
-        $result = $db->query("SELECT * FROM note_availability")->fetchAll();
+        $result = \call_user_func($this->runQuery, "SELECT * FROM note_availability");
         $finalResult = [];
         foreach($result as $value) {
             $finalResult[$value['note']] = $value['quantity'];
